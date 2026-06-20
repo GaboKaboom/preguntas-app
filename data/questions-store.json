@@ -1,0 +1,32 @@
+{
+  "code": "GABO2026",
+  "questions": [
+    {
+      "id": "1e03e7c7-1aab-43c3-8642-1e6f035ff61f",
+      "name": "Compa�ero de prueba",
+      "question": "�Qu� tema vamos a ver ma�ana?",
+      "createdAt": "2026-05-31T01:17:30.207Z",
+      "answer": "",
+      "answeredBy": "",
+      "answeredAt": null
+    },
+    {
+      "id": "test-1",
+      "name": "Juan",
+      "question": "¿Cómo cambio el código de acceso?",
+      "createdAt": "2026-05-26T21:30:00.000Z",
+      "answer": "",
+      "answeredBy": "",
+      "answeredAt": null
+    },
+    {
+      "id": "test-2",
+      "name": "Ana",
+      "question": "¿Puedo usar esto desde mi celular?",
+      "createdAt": "2026-05-26T21:32:00.000Z",
+      "answer": "Sí, solo abre el navegador e ingresa la URL del servidor.",
+      "answeredBy": "Moderador",
+      "answeredAt": "2026-05-26T21:33:00.000Z"
+    }
+  ]
+}

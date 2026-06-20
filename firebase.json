@@ -3,11 +3,13 @@
     "public": ".",
     "ignore": [
       "firebase.json",
+      ".firebaserc",
+      "github.bat",
       "**/.*",
       "**/node_modules/**",
-      "server.js",
-      "start-server.bat",
-      "compartir.bat"
+      "**/*.exe",
+      "**/*.zip",
+      "data/"
     ],
     "rewrites": [
       {

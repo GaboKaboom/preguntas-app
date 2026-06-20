@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El caucho: ¿La opción más óptima? - Gabriel Silva</title>
+    <!-- CSS de la Presentación -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Fondos Decorativos Animados -->
+    <div class="bg-grid-overlay"></div>
+    <div class="bg-turf-line line-1"></div>
+    <div class="bg-turf-line line-2"></div>
+
+    <!-- Barra de Encabezado Superior -->
+    <header class="header-bar">
+        <div class="logo-container">
+            <div class="logo-symbol">C</div>
+            <div class="logo-text">Caucho & Turf</div>
+        </div>
+        <button class="drawer-toggle" id="drawerToggle" aria-label="Abrir menú">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Contenedor Principal de las Diapositivas -->
+    <main class="presentation-container">
+
+        <!-- DIAPOSITIVA 1: Portada -->
+        <section class="slide active" id="slide-1">
+            <div class="slide-card">
+                <div class="cover-container">
+                    <span class="cover-badge">Investigación de Impacto Ambiental y Salud</span>
+                    <h1 class="cover-title">El caucho:<br>¿La opción más óptima?</h1>
+                    <p class="cover-subtitle">Un análisis crítico sobre el uso de relleno de caucho en canchas de césped sintético y sus consecuencias.</p>
+                    
+                    <div class="cover-image-frame">
+                        <img src="images/slide1_title.jpg" alt="Césped sintético y caucho">
+                    </div>
+
+                    <div class="cover-footer">
+                        <div class="cover-author">Por: Gabriel Silva</div>
+                        <div class="cover-school">Colegio Nuestra Señora del Camino</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 2: Causas de Enfermedades -->
+        <section class="slide" id="slide-2">
+            <div class="slide-card">
+                <div class="slide-header">
+                    <h2 class="slide-title">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -3px;">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        Riesgos de Enfermedades
+                    </h2>
+                    <span class="school-badge">Colegio N. S. del Camino</span>
+                </div>
+                <div class="slide-body grid-2col">
+                    <div class="content-text">
+                        <p class="intro-lead">El caucho no es inerte. Al estar expuesto a la intemperie en canchas deportivas, experimenta una <strong>degradación física constante</strong> que afecta a los deportistas.</p>
+                        
+                        <div class="info-card-list">
+                            <div class="info-card">
+                                <div class="info-card-icon">🌪️</div>
+                                <div class="info-card-content">
+                                    <h4>Erosión Climática y Uso</h4>
+                                    <p>La radiación solar (rayos UV), el viento y la fricción constante del juego erosionan las partículas de caucho, fragmentándolas en partículas microscópicas llamadas <strong>microplásticos</strong>.</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-card-icon">🫁</div>
+                                <div class="info-card-content">
+                                    <h4>Vías de Ingreso al Organismo</h4>
+                                    <p>Debido a su tamaño microscópico, estas partículas entran fácilmente al organismo por tres vías directas: la <strong>inspiración</strong> (al inhalar el polvo suspendido), la <strong>alimentación</strong> e <strong>ingesta accidental (bebeción)</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="advisory-box">
+                            <span>⚠️</span>
+                            <p><strong>Alerta Médica:</strong> Múltiples investigaciones de salud confirman que la acumulación de microplásticos en el torrente sanguíneo provoca <strong>problemas respiratorios, cardiovasculares</strong> y, según estudios emergentes, podría tener <strong>vínculos con agentes carcinógenos</strong>.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="media-container">
+                        <div class="media-frame">
+                            <img src="images/slide2_diseases.png" alt="Efectos del caucho e inhalación">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 3: Cantidad y Concentración -->
+        <section class="slide" id="slide-3">
+            <div class="slide-card">
+                <div class="slide-header">
+                    <h2 class="slide-title">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -3px;">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        Generación de Microplásticos
+                    </h2>
+                    <span class="school-badge">Colegio N. S. del Camino</span>
+                </div>
+                <div class="slide-body grid-2col">
+                    <div class="content-text">
+                        <p class="intro-lead">La cantidad de micropartículas suspendidas y esparcidas es alarmante. Analicemos las cifras estimadas basándonos en la <strong>Cancha Verde Grande</strong> de nuestro colegio.</p>
+                        
+                        <div class="info-card turf-style">
+                            <div class="info-card-icon">📐</div>
+                            <div class="info-card-content">
+                                <h4>Proporción de Generación</h4>
+                                <p>Por cada metro cúbico (m³) de plástico expuesto, se estima una liberación de <strong>0,02 a 2 gramos</strong> de microplásticos por semana.</p>
+                            </div>
+                        </div>
+
+                        <!-- Calculadora Interactiva de Acumulación -->
+                        <div class="calculator-box">
+                            <div class="calculator-title">
+                                <span>🧮</span> Calculadora de Acumulación en la Cancha Verde (11 m³)
+                            </div>
+                            <div class="slider-container">
+                                <div class="slider-header">
+                                    <span>Tiempo transcurrido:</span>
+                                    <span class="weeks-count" id="weeksVal">1 semana</span>
+                                </div>
+                                <input type="range" min="1" max="52" value="1" class="custom-range" id="weeksSlider">
+                            </div>
+                            <div class="calculator-results">
+                                <div class="result-card min-card">
+                                    <div class="result-label">Estimación Mínima</div>
+                                    <div class="result-value" id="calcMin">0.22 g</div>
+                                </div>
+                                <div class="result-card max-card">
+                                    <div class="result-label">Estimación Máxima</div>
+                                    <div class="result-value" id="calcMax">22.00 g</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="media-container" style="flex-direction: column; gap: 15px;">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="images/slide3_quantity_1.jpg" alt="Cancha escolar de césped">
+                                <div class="gallery-caption">Cancha Verde Grande (11 m³ de caucho)</div>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="images/slide3_quantity_2.jpg" alt="Muestra de microplásticos">
+                                <div class="gallery-caption">Fragmentación en microplásticos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 4: Comparativa de Fuentes -->
+        <section class="slide" id="slide-4">
+            <div class="slide-card">
+                <div class="slide-header">
+                    <h2 class="slide-title">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a3e635" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -3px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        Fuentes de Microplásticos
+                    </h2>
+                    <span class="school-badge">Colegio N. S. del Camino</span>
+                </div>
+                <div class="slide-body">
+                    <p class="intro-lead" style="margin-bottom: 5px;">Comparativa científica de la <strong>cantidad de partículas de microplásticos por m³</strong> encontradas en diferentes fuentes cotidianas y del entorno.</p>
+                    
+                    <div class="comparative-layout">
+                        <!-- Tabla Interactiva -->
+                        <div class="table-wrapper">
+                            <table class="premium-table" id="sourcesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Fuente Evaluada</th>
+                                        <th>Partículas / m³</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-source="cangrejo">
+                                        <td>🦀 Cangrejo (Mariscos)</td>
+                                        <td class="qty-cell">592.00</td>
+                                    </tr>
+                                    <tr data-source="hielo">
+                                        <td>🧊 Cubos de hielo</td>
+                                        <td class="qty-cell">19.00 - 178.00</td>
+                                    </tr>
+                                    <tr data-source="te">
+                                        <td>🍵 Bolsas de té</td>
+                                        <td class="qty-cell">8.60 - 52.30</td>
+                                    </tr>
+                                    <tr data-source="aire">
+                                        <td>🌬️ Aerotransportado (Aire)</td>
+                                        <td class="qty-cell">3.99 - 41.12</td>
+                                    </tr>
+                                    <tr data-source="comida">
+                                        <td>🍱 Envases de comida</td>
+                                        <td class="qty-cell">3.00 - 29.00</td>
+                                    </tr>
+                                    <tr data-source="empaque">
+                                        <td>📦 Empaques plásticos</td>
+                                        <td class="qty-cell">4.00 - 18.70</td>
+                                    </tr>
+                                    <tr data-source="sal">
+                                        <td>🧂 Sal de mesa</td>
+                                        <td class="qty-cell">9.77</td>
+                                    </tr>
+                                    <tr data-source="pescado">
+                                        <td>🐟 Pescado de consumo</td>
+                                        <td class="qty-cell">0.63 - 7.00</td>
+                                    </tr>
+                                    <tr data-source="ostra">
+                                        <td>🦪 Ostra marina</td>
+                                        <td class="qty-cell">3.34</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Gráfico de Barras CSS Puro -->
+                        <div class="chart-wrapper">
+                            <h3 class="chart-title">Visualización de Concentración (Máximos)</h3>
+                            <div class="chart-container" id="barChart">
+                                <div class="chart-row" data-source="cangrejo">
+                                    <div class="chart-label">Cangrejo</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="100"></div>
+                                    </div>
+                                    <div class="chart-value">592</div>
+                                </div>
+                                <div class="chart-row" data-source="hielo">
+                                    <div class="chart-label">Cubos de hielo</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="30"></div>
+                                    </div>
+                                    <div class="chart-value">178</div>
+                                </div>
+                                <div class="chart-row" data-source="te">
+                                    <div class="chart-label">Bolsas de té</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="9"></div>
+                                    </div>
+                                    <div class="chart-value">52.3</div>
+                                </div>
+                                <div class="chart-row" data-source="aire">
+                                    <div class="chart-label">Aire (Respirable)</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="7"></div>
+                                    </div>
+                                    <div class="chart-value">41.12</div>
+                                </div>
+                                <div class="chart-row" data-source="comida">
+                                    <div class="chart-label">Envases comida</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="5"></div>
+                                    </div>
+                                    <div class="chart-value">29</div>
+                                </div>
+                                <div class="chart-row" data-source="empaque">
+                                    <div class="chart-label">Empaques</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="3"></div>
+                                    </div>
+                                    <div class="chart-value">18.7</div>
+                                </div>
+                                <div class="chart-row" data-source="sal">
+                                    <div class="chart-label">Sal</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="1.6"></div>
+                                    </div>
+                                    <div class="chart-value">9.77</div>
+                                </div>
+                                <div class="chart-row" data-source="pescado">
+                                    <div class="chart-label">Pescado</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="1.2"></div>
+                                    </div>
+                                    <div class="chart-value">7.0</div>
+                                </div>
+                                <div class="chart-row" data-source="ostra">
+                                    <div class="chart-label">Ostra</div>
+                                    <div class="chart-bar-container">
+                                        <div class="chart-bar" data-val="0.6"></div>
+                                    </div>
+                                    <div class="chart-value">3.34</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIAPOSITIVA 5: Alternativas y Soluciones -->
+        <section class="slide" id="slide-5">
+            <div class="slide-card">
+                <div class="slide-header">
+                    <h2 class="slide-title">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -3px;">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        Soluciones y Alternativas Ecológicas
+                    </h2>
+                    <span class="school-badge">Colegio N. S. del Camino</span>
+                </div>
+                <div class="slide-body">
+                    <div class="alternatives-container">
+                        <p class="intro-lead" style="margin-bottom: 5px;">¿Podemos cambiar la situación? Sí. Existen <strong>rellenos de origen 100% natural</strong> que eliminan por completo el peligro de microplásticos y reducen la temperatura de la cancha del Colegio Nuestra Señora del Camino.</p>
+                        
+                        <div class="alt-grid">
+                            <!-- Alternativa 1 -->
+                            <div class="alt-card">
+                                <div class="alt-header">
+                                    <h3 class="alt-title">Corcho Natural</h3>
+                                    <div class="alt-icon">🌳</div>
+                                </div>
+                                <p class="alt-body">Proviene de la corteza del alcornoque. Es 100% biodegradable, no genera toxinas y tiene una amortiguación y elasticidad idénticas a las del caucho convencional.</p>
+                                <div class="alt-stats">
+                                    <div class="alt-stat-row">
+                                        <span class="stat-label">Impacto Ecológico</span>
+                                        <span class="stat-value">Excelente (Nulo)</span>
+                                    </div>
+                                    <div class="alt-stat-row">
+                                        <span class="stat-label">Temperatura de Cancha</span>
+                                        <span class="stat-value">Reduce hasta 30%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Alternativa 2 -->
+                            <div class="alt-card">
+                                <div class="alt-header">
+                                    <h3 class="alt-title">Fibra de Coco + Arena</h3>
+                                    <div class="alt-icon">🥥</div>
+                                </div>
+                                <p class="alt-body">Mezcla orgánica de fibra de coco y arena de sílice fina. Retiene la humedad natural de la lluvia reduciendo el calor de fricción de las fibras plásticas del césped.</p>
+                                <div class="alt-stats">
+                                    <div class="alt-stat-row">
+                                        <span class="stat-label">Impacto Ecológico</span>
+                                        <span class="stat-value">Excelente (100% orgánico)</span>
+                                    </div>
+                                    <div class="alt-stat-row">
+                                        <span class="stat-label">Durabilidad</span>
+                                        <span class="stat-value">Alta (Muy estable)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Alternativa 3 -->
+                            <div class="alt-card">
+                                <div class="alt-header">
+                                    <h3 class="alt-title">Arena Sílice Pura</h3>
+                                    <div class="alt-icon">🏖️</div>
+                                </div>
+                                <p class="alt-body">El relleno de arena redondeada de sílice es una de las opciones tradicionales más estables, no libera partículas plásticas y reduce sustancialmente el coste inicial.</p>
+                                <div class="alt-stats">
+                                    <div class="alt-stat-row">
+                                        <span class="stat-label">Impacto Ecológico</span>
+                                        <span class="stat-value">Bueno (Mineral natural)</span>
+                                    </div>
+                                    <div class="alt-stat-row">
+                                        <span class="stat-label">Coste Inicial</span>
+                                        <span class="stat-value">Económico</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Barra de Navegación Inferior -->
+    <footer class="navigation-bar">
+        <div class="dots-container" id="dotsContainer">
+            <span class="dot active" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+            <span class="dot" data-slide="3"></span>
+            <span class="dot" data-slide="4"></span>
+            <span class="dot" data-slide="5"></span>
+        </div>
+
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn" disabled aria-label="Diapositiva anterior">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="slide-indicator" id="slideIndicator">Diapositiva <span>1</span> de 5</div>
+            <button class="nav-btn" id="nextBtn" aria-label="Diapositiva siguiente">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Menú Desplegable Lateral (Drawer) -->
+    <div class="nav-drawer" id="navDrawer">
+        <div class="drawer-header">
+            <h3 class="drawer-title">Menú de Navegación</h3>
+            <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú">&times;</button>
+        </div>
+        <ul class="drawer-menu">
+            <li class="drawer-item active" data-slide="1">
+                <span class="drawer-item-num">01</span>
+                <span class="drawer-item-text">Portada de Presentación</span>
+            </li>
+            <li class="drawer-item" data-slide="2">
+                <span class="drawer-item-num">02</span>
+                <span class="drawer-item-text">Riesgos y Enfermedades</span>
+            </li>
+            <li class="drawer-item" data-slide="3">
+                <span class="drawer-item-num">03</span>
+                <span class="drawer-item-text">Cantidad y Acumulación</span>
+            </li>
+            <li class="drawer-item" data-slide="4">
+                <span class="drawer-item-num">04</span>
+                <span class="drawer-item-text">Comparativa de Fuentes</span>
+            </li>
+            <li class="drawer-item" data-slide="5">
+                <span class="drawer-item-num">05</span>
+                <span class="drawer-item-text">Alternativas Ecológicas</span>
+            </li>
+        </ul>
+
+        <div class="keyboard-hints">
+            <h5>Atajos del Teclado</h5>
+            <div class="keyboard-hint-row">
+                <span>Diapositiva Siguiente</span>
+                <span class="hint-key">Derecha / Espacio</span>
+            </div>
+            <div class="keyboard-hint-row">
+                <span>Diapositiva Anterior</span>
+                <span class="hint-key">Izquierda</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Lógica Interactiva -->
+    <script src="script.js"></script>
+</body>
+</html>
