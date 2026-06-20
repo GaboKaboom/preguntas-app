@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preguntas y respuestas</title>
+  <style>
+    :root{
+      --bg:#f6f7f9;
+      --surface:#ffffff;
+      --surface-2:#f1f3f5;
+      --border:#d9dee5;
+      --text:#1f2937;
+      --text-2:#4b5563;
+      --muted:#6b7280;
+      --accent:#273270;
+      --accent-hover:#1f295a;
+      --gold:#FFD406;
+      --red:#E44315;
+      --success:#16a34a;
+      --shadow:0 1px 2px rgba(0,0,0,.04);
+      --radius:14px;
+      --radius-sm:10px;
+      --max:920px;
+      --font:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--font);
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      line-height:1.5;
+    }
+
+    .app-shell{
+      width:min(var(--max), calc(100% - 2rem));
+      margin:0 auto;
+      padding:2rem 0 3rem;
+    }
+
+    .page-eyebrow{
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:.5rem;
+    }
+
+    .page-title{
+      font-size:clamp(1.8rem, 3vw, 2.6rem);
+      font-weight:800;
+      line-height:1.15;
+      margin-bottom:.5rem;
+    }
+
+    .page-subtitle{
+      color:var(--text-2);
+      font-size:1rem;
+      max-width:60ch;
+      margin-bottom:1.5rem;
+    }
+
+    /* Logo */
+    .logo-corner{
+      position:fixed;
+      top:1rem;
+      right:1rem;
+      z-index:200;
+      width:52px;
+      height:52px;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.12);
+      border:1px solid var(--border);
+    }
+    .logo-corner img{width:100%;height:100%;object-fit:contain;background:#FFD406;}
+
+    /* FAB */
+    .fab-mailbox{
+      position:fixed;
+      bottom:1.5rem;
+      left:1.5rem;
+      z-index:100;
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.4rem;
+      cursor:pointer;
+      box-shadow:0 4px 14px rgba(39,50,112,.35);
+      transition:.2s ease;
+    }
+    .fab-mailbox:hover{background:var(--accent-hover);}
+    .fab-badge{
+      position:absolute;
+      top:-4px;
+      right:-4px;
+      background:#ef4444;
+      color:#fff;
+      font-size:.68rem;
+      font-weight:700;
+      border-radius:999px;
+      min-width:18px;
+      height:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 4px;
+      border:2px solid #fff;
+    }
+    .fab-badge.hidden{display:none;}
+
+    /* Welcome */
+    #screen-welcome{
+      min-height:100vh;
+      display:none;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+      text-align:center;
+      gap:2rem;
+    }
+    #screen-welcome.active{display:flex;border-top:4px solid var(--gold);}
+
+    .welcome-header{max-width:540px;}
+    .welcome-header h1{
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:800;
+      line-height:1.15;
+      margin-bottom:.75rem;
+    }
+    .welcome-header p{color:var(--text-2);font-size:1rem;}
+
+    .welcome-cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:1rem;
+      width:100%;
+      max-width:640px;
+    }
+
+    .welcome-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:1.5rem;
+      text-align:left;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .welcome-card:hover{border-color:var(--accent);box-shadow:0 4px 14px rgba(39,50,112,.1);}
+
+    .card-icon{font-size:1.8rem;margin-bottom:.9rem;display:block;}
+    .welcome-card h2{font-size:1.1rem;font-weight:700;margin-bottom:.4rem;}
+    .welcome-card p{color:var(--text-2);font-size:.9rem;line-height:1.6;margin-bottom:1.2rem;}
+
+    .card-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      border-radius:999px;
+      padding:.65rem 1rem;
+      border:1px solid transparent;
+      font:inherit;
+      font-size:.875rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:.2s ease;
+      width:100%;
+      background:var(--accent);
+      color:#fff;
+    }
+    .card-btn:hover{background:var(--accent-hover);}
+    .card-btn-admin{background:#1a1000;color:var(--gold);}
+    .card-btn-admin:hover{background:#2a1a00;}
+
+    /* Screens */
+    .screen{display:none;}
+    .screen.active{display:block;}
+
+    .app-shell{
+      width:min(var(--max), calc(100% - 2rem));
+      margin:0 auto;
+      padding:2rem 0 3rem;
+    }
+
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:.55rem 1rem;
+      font:inherit;
+      font-size:.875rem;
+      cursor:pointer;
+      color:var(--text-2);
+      margin-bottom:1.5rem;
+      transition:.2s ease;
+    }
+    .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+    .panel{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:1.5rem;
+      margin-bottom:1rem;
+    }
+
+    .stacked-form{display:grid;gap:1rem;}
+    .stacked-form label{display:grid;gap:.4rem;font-size:.9rem;font-weight:600;}
+    .stacked-form input,
+    .stacked-form textarea{
+      width:100%;
+      padding:.85rem 1rem;
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      background:var(--surface-2);
+      color:var(--text);
+      font:inherit;
+      outline:none;
+      resize:vertical;
+      transition:.2s ease;
+    }
+    .stacked-form input:focus,
+    .stacked-form textarea:focus{
+      border-color:var(--accent);
+      background:#fff;
+      box-shadow:0 0 0 3px rgba(39,50,112,.15);
+    }
+    .stacked-form input::placeholder,
+    .stacked-form textarea::placeholder{color:var(--muted);}
+
+    .form-actions{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .primary-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      border-radius:999px;
+      padding:.75rem 1.4rem;
+      border:none;
+      font:inherit;
+      font-size:.9rem;
+      font-weight:600;
+      cursor:pointer;
+      background:var(--accent);
+      color:#fff;
+      transition:.2s ease;
+    }
+    .primary-btn:hover:not(:disabled){background:var(--accent-hover);}
+    .primary-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+    .helper-text,.muted-text{color:var(--muted);font-size:.85rem;}
+
+    .info-box{
+      margin-top:1.25rem;
+      padding:1rem 1.1rem;
+      border-radius:var(--radius-sm);
+      background:var(--surface-2);
+      border:1px solid var(--border);
+    }
+    .info-box h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem;}
+    .info-box ul{padding-left:1.1rem;color:var(--text-2);font-size:.9rem;line-height:1.8;}
+
+    .message-box{
+      border-radius:var(--radius-sm);
+      padding:.9rem 1rem;
+      font-size:.9rem;
+      background:rgba(255,212,6,.08);
+      border:1px solid rgba(255,212,6,.25);
+      color:#8a7300;
+      margin-bottom:1rem;
+    }
+    .message-box.error{
+      background:rgba(228,67,21,.08);
+      border-color:rgba(228,67,21,.18);
+      color:var(--red);
+    }
+
+    .questions-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1rem;
+      flex-wrap:wrap;
+    }
+    .questions-head h3{font-size:1rem;font-weight:700;}
+
+    .questions-container{display:flex;flex-direction:column;gap:.85rem;}
+
+    .question-card,.buzon-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      padding:1.1rem 1.2rem;
+      transition:.2s ease;
+    }
+    .question-card:hover,.buzon-card:hover{border-color:var(--accent);}
+
+    .question-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:1rem;
+      margin-bottom:.75rem;
+      flex-wrap:wrap;
+    }
+    .question-meta strong{display:block;font-weight:600;font-size:.92rem;margin-bottom:.15rem;}
+
+    .question-text,.buzon-question{
+      color:var(--text-2);
+      font-size:.92rem;
+      line-height:1.7;
+      margin-bottom:.85rem;
+    }
+
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      border-radius:999px;
+      padding:.25rem .7rem;
+      font-size:.75rem;
+      font-weight:700;
+      border:1px solid var(--border);
+      white-space:nowrap;
+    }
+    .status-pill.pending{color:#b45309;background:rgba(228,67,21,.08);border-color:rgba(228,67,21,.2);}
+    .status-pill.answered{color:#1f8a4a;background:rgba(22,163,74,.1);border-color:rgba(22,163,74,.2);}
+    .status-pill.answered{color:var(--success);background:rgba(22,163,74,.1);border-color:rgba(22,163,74,.2);}
+
+    .answer-preview{
+      margin:0 0 .9rem;
+      padding:.85rem 1rem;
+      border-radius:var(--radius-sm);
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      font-size:.9rem;
+      color:var(--text-2);
+      line-height:1.6;
+    }
+
+    .buzon-name{font-weight:600;font-size:.92rem;margin-bottom:.1rem;}
+    .buzon-date{font-size:.8rem;color:var(--muted);margin-bottom:.6rem;}
+    .buzon-answer-box{
+      padding:.8rem 1rem;
+      border-radius:var(--radius-sm);
+      background:rgba(39,50,112,.05);
+      border:1px solid rgba(39,50,112,.15);
+      font-size:.9rem;
+      color:var(--text-2);
+      line-height:1.6;
+    }
+    .buzon-answer-box strong{color:var(--accent);display:block;margin-bottom:.3rem;font-size:.8rem;text-transform:uppercase;}
+    .buzon-waiting{font-size:.82rem;color:var(--red);font-style:italic;}
+
+    .loading-text{color:var(--muted);font-size:.9rem;text-align:center;padding:1.5rem 0;}
+
+    .hidden{display:none !important;}
+
+    @media (max-width:640px){
+      .app-shell{width:calc(100% - 1rem);padding:1rem 0 2rem;}
+      .panel,.welcome-card{padding:1.1rem;}
+      .form-actions{flex-direction:column;align-items:stretch;}
+      .primary-btn{width:100%;}
+      .welcome-cards{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-corner">
+    <img src="images/logochico.svg" alt="Logo NSDC" />
+  </div>
+
+  <button class="fab-mailbox" id="fabBtn" title="Ver buzón" style="position:fixed;bottom:1.5rem;left:1.5rem;">
+    📬
+    <span class="fab-badge hidden" id="fabBadge">0</span>
+  </button>
+
+  <!-- BIENVENIDA -->
+  <div id="screen-welcome" class="screen active" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;gap:2rem;">
+    <div class="welcome-header">
+      <p class="page-eyebrow">Sistema de preguntas</p>
+      <h1>Preguntas y respuestas del grupo</h1>
+      <p>Elige cómo quieres participar hoy.</p>
+    </div>
+    <div class="welcome-cards">
+      <div class="welcome-card" id="btnPublic">
+        <span class="card-icon">✉️</span>
+        <h2>Hacer una pregunta</h2>
+        <p>Envía tu duda al grupo. No necesitas código.</p>
+        <button class="card-btn">Ir a preguntar →</button>
+      </div>
+      <div class="welcome-card" id="btnAdmin">
+        <span class="card-icon">🔑</span>
+        <h2>Responder preguntas</h2>
+        <p>Accede con tu código para responder las dudas del grupo.</p>
+        <button class="card-btn card-btn-admin">Ingresar con código →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HACER PREGUNTA -->
+  <div id="screen-public" class="screen">
+    <div class="app-shell">
+      <button class="back-btn" id="backFromPublic">← Volver</button>
+      <p class="page-eyebrow">Formulario público</p>
+      <h1 class="page-title">Enviar una pregunta</h1>
+      <p class="page-subtitle">Tu pregunta se guarda en la nube y todos la pueden ver.</p>
+      <div class="panel">
+        <form id="questionForm" class="stacked-form">
+          <label>Nombre o alias<input type="text" id="questionName" maxlength="40" placeholder="Ej. Camila" /></label>
+          <label>Pregunta<textarea id="questionText" rows="5" maxlength="500" placeholder="Escribe tu pregunta aquí" required></textarea></label>
+          <div class="form-actions">
+            <button type="submit" class="primary-btn">Enviar pregunta →</button>
+            <p class="helper-text">Visible para todos los dispositivos.</p>
+          </div>
+        </form>
+        <div class="info-box" style="margin-top:1.25rem;">
+          <h3>¿Cómo funciona?</h3>
+          <ul>
+            <li>Tu pregunta se guarda en la nube al instante.</li>
+            <li>La persona encargada la verá y responderá.</li>
+            <li>Puedes ver todas las preguntas en el buzón 📬</li>
+          </ul>
+        </div>
+      </div>
+      <div id="publicMessage" class="message-box hidden" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="screen-login" class="screen">
+    <div class="app-shell">
+      <button class="back-btn" id="backFromLogin">← Volver</button>
+      <p class="page-eyebrow">Acceso protegido</p>
+      <h1 class="page-title">Ingresar con código</h1>
+      <p class="page-subtitle">Ingresa tu código de moderador para acceder al panel de respuestas.</p>
+      <div class="panel">
+        <form id="adminCodeForm" class="stacked-form">
+          <label>Código de acceso<input type="password" id="adminCodeInput" placeholder="Ingresa el código" autocomplete="off" /></label>
+          <div class="form-actions">
+            <button type="submit" class="primary-btn" style="background:#1a1000;color:#f5c800;">Entrar →</button>
+          </div>
+        </form>
+        <div id="loginMessage" class="message-box hidden" style="margin-top:1rem;" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL ADMIN -->
+  <div id="screen-admin" class="screen">
+    <div class="app-shell">
+      <button class="back-btn" id="logoutBtn">← Cerrar sesión</button>
+      <p class="page-eyebrow">Panel de moderación</p>
+      <h1 class="page-title">Responder preguntas</h1>
+      <p class="page-subtitle">Las preguntas se actualizan en tiempo real.</p>
+      <div class="panel">
+        <div id="adminMessage" class="message-box hidden" aria-live="polite"></div>
+        <div class="questions-head">
+          <h3>Preguntas recibidas</h3>
+          <span id="questionsCount" class="muted-text">0</span>
+        </div>
+        <div id="questionsContainer" class="questions-container"><p class="loading-text">Cargando...</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUZÓN -->
+  <div id="screen-buzon" class="screen">
+    <div class="app-shell">
+      <button class="back-btn" id="buzonBackBtn">← Volver</button>
+      <p class="page-eyebrow">Buzón público</p>
+      <h1 class="page-title">Buzón de preguntas</h1>
+      <p class="page-subtitle">Todas las preguntas y sus respuestas, en tiempo real.</p>
+      <div class="panel">
+        <div class="questions-head">
+          <h3>Preguntas</h3>
+          <span id="buzonCount" class="muted-text">0</span>
+        </div>
+        <div id="buzonContainer" class="questions-container"><p class="loading-text">Cargando...</p></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAXSdd-Eijun_CyaIC9F7DDJEbh6DBXY6E",
+      authDomain: "preguntas-bs-fn.firebaseapp.com",
+      projectId: "preguntas-bs-fn",
+      storageBucket: "preguntas-bs-fn.firebasestorage.app",
+      messagingSenderId: "868787862684",
+      appId: "1:868787862684:web:de6c3946a943ef369f0159"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    const SEEN_KEY     = 'qna-seen-count';
+    const adminCode    = 'RED_NSDC';
+    let previousScreen = 'screen-welcome';
+    let allQuestions   = [];
+
+    /* ── Navegación ── */
+    function goTo(screenId) {
+      const current = document.querySelector('.screen.active');
+      if (current) previousScreen = current.id;
+      document.querySelectorAll('.screen').forEach(s => {
+        s.classList.remove('active');
+        s.style.display = 'none';
+      });
+      const next = document.getElementById(screenId);
+      next.classList.add('active');
+      next.style.display = screenId === 'screen-welcome' ? 'flex' : 'block';
+      window.scrollTo(0, 0);
+      if (screenId === 'screen-buzon') { renderBuzon(); markAllSeen(); }
+      if (screenId === 'screen-admin') renderAdmin();
+    }
+
+    // Init: asegurar que solo welcome sea visible
+    document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
+    const welcome = document.getElementById('screen-welcome');
+    welcome.style.display = 'flex';
+
+    document.getElementById('fabBtn').addEventListener('click', () => goTo('screen-buzon'));
+    document.getElementById('btnPublic').addEventListener('click', () => goTo('screen-public'));
+    document.getElementById('btnAdmin').addEventListener('click', () => goTo('screen-login'));
+    document.getElementById('backFromPublic').addEventListener('click', () => goTo('screen-welcome'));
+    document.getElementById('backFromLogin').addEventListener('click', () => goTo('screen-welcome'));
+    document.getElementById('logoutBtn').addEventListener('click', () => goTo('screen-welcome'));
+    document.getElementById('buzonBackBtn').addEventListener('click', () => goTo(previousScreen || 'screen-welcome'));
+
+    /* ── Mensajes ── */
+    function showMsg(id, text, type = 'success') {
+      const box = document.getElementById(id);
+      box.textContent = text;
+      box.className = 'message-box' + (type === 'error' ? ' error' : '');
+      box.classList.remove('hidden');
+    }
+    function hideMsg(id) { document.getElementById(id).classList.add('hidden'); }
+
+    /* ── Badge ── */
+    function updateBadge() {
+      const unseen = Math.max(0, allQuestions.length - parseInt(localStorage.getItem(SEEN_KEY) || '0', 10));
+      const badge  = document.getElementById('fabBadge');
+      if (unseen > 0) { badge.textContent = unseen > 99 ? '99+' : unseen; badge.classList.remove('hidden'); }
+      else { badge.classList.add('hidden'); }
+    }
+    function markAllSeen() {
+      localStorage.setItem(SEEN_KEY, String(allQuestions.length));
+      updateBadge();
+    }
+
+    /* ── Firestore en tiempo real ── */
+    onSnapshot(collection(db, 'questions'), (snapshot) => {
+      allQuestions = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      allQuestions.sort(function(a, b) {
+        var tA = a.createdAt ? a.createdAt.seconds : 0;
+        var tB = b.createdAt ? b.createdAt.seconds : 0;
+        return tB - tA;
+      });
+      updateBadge();
+      const ahora = Date.now();
+      allQuestions.forEach(q => {
+        if (q.answer?.trim() && q.answeredAt) {
+          const respondidaHace = ahora - q.answeredAt.toDate().getTime();
+          if (respondidaHace > 24 * 60 * 60 * 1000) {
+            deleteDoc(doc(db, 'questions', q.id));
+          }
+        }
+      });
+      const active = document.querySelector('.screen.active')?.id;
+      if (active === 'screen-admin') renderAdmin();
+      if (active === 'screen-buzon') renderBuzon();
+    }, function(error) {
+      console.error('Firestore error:', error);
+      document.querySelectorAll('.loading-text').forEach(function(el) {
+        el.textContent = 'Error de conexión: ' + error.message;
+        el.style.color = '#ef4444';
+      });
+    });
+
+    /* ── Auth ── */
+    document.getElementById('adminCodeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const entered = document.getElementById('adminCodeInput').value.trim();
+      if (!entered) { showMsg('loginMessage', 'Ingresa un código para continuar.', 'error'); return; }
+      if (entered === adminCode) {
+        document.getElementById('adminCodeInput').value = '';
+        hideMsg('loginMessage');
+        goTo('screen-admin');
+      } else {
+        showMsg('loginMessage', 'Código incorrecto. Inténtalo de nuevo.', 'error');
+      }
+    });
+
+    /* ── Formulario público ── */
+    document.getElementById('questionForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideMsg('publicMessage');
+      const name     = document.getElementById('questionName').value.trim() || 'Anónimo';
+      const question = document.getElementById('questionText').value.trim();
+      if (!question) { showMsg('publicMessage', 'Escribe una pregunta válida.', 'error'); return; }
+      try {
+        await addDoc(collection(db, 'questions'), { name, question, createdAt: serverTimestamp(), answer: '', answeredAt: null });
+        document.getElementById('questionForm').reset();
+        showMsg('publicMessage', '✓ Pregunta enviada. Ya es visible para todos 📬');
+      } catch { showMsg('publicMessage', 'Error al enviar. Intenta de nuevo.', 'error'); }
+    });
+
+    /* ── Render admin ── */
+    function renderAdmin() {
+      const container = document.getElementById('questionsContainer');
+      const count     = document.getElementById('questionsCount');
+      container.innerHTML = '';
+      const sorted = [...allQuestions].sort((a, b) => (a.answer && !b.answer) ? 1 : (!a.answer && b.answer) ? -1 : 0);
+      count.textContent = sorted.length;
+      if (!sorted.length) { container.innerHTML = '<p class="muted-text">Aún no hay preguntas.</p>'; return; }
+      sorted.forEach(q => container.appendChild(createAdminCard(q)));
+    }
+
+    function createAdminCard(question) {
+      const card     = document.createElement('article');
+      card.className = 'question-card';
+      const answered = Boolean(question.answer?.trim());
+      const date     = question.createdAt?.toDate
+        ? question.createdAt.toDate().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' })
+        : '—';
+      card.innerHTML = `
+        <div class="question-meta">
+          <div><strong>${esc(question.name || 'Anónimo')}</strong><span class="muted-text">${date}</span></div>
+          <span class="status-pill ${answered ? 'answered' : 'pending'}">${answered ? '✓ Respondida' : '· Pendiente'}</span>
+        </div>
+        <p class="question-text">${esc(question.question)}</p>
+        ${answered ? `<div class="answer-preview"><strong>Respuesta:</strong> ${esc(question.answer)}</div>` : ''}
+        <form class="answer-form stacked-form" style="margin-top:.75rem;">
+          <label>Respuesta
+            <textarea name="answer" rows="4" maxlength="500" placeholder="Escribe la respuesta" ${answered ? 'disabled' : ''}>${answered ? esc(question.answer) : ''}</textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="primary-btn" ${answered ? 'disabled' : ''}>Guardar respuesta</button>
+          </div>
+        </form>
+      `;
+      card.querySelector('.answer-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const answer = card.querySelector('textarea[name="answer"]').value.trim();
+        if (!answer) { showMsg('adminMessage', 'Escribe una respuesta antes de guardar.', 'error'); return; }
+        try {
+          await updateDoc(doc(db, 'questions', question.id), { answer, answeredAt: serverTimestamp() });
+          showMsg('adminMessage', '✓ Respuesta guardada y visible para todos.');
+        } catch { showMsg('adminMessage', 'Error al guardar. Intenta de nuevo.', 'error'); }
+      });
+      return card;
+    }
+
+    /* ── Render buzón ── */
+    function renderBuzon() {
+      const container = document.getElementById('buzonContainer');
+      const count     = document.getElementById('buzonCount');
+      container.innerHTML = '';
+      count.textContent = allQuestions.length;
+      if (!allQuestions.length) { container.innerHTML = '<p class="muted-text">El buzón está vacío. ¡Sé el primero en preguntar!</p>'; return; }
+      allQuestions.forEach(q => {
+        const card     = document.createElement('article');
+        card.className = 'buzon-card';
+        const date     = q.createdAt?.toDate
+          ? q.createdAt.toDate().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' })
+          : '—';
+        const answered = Boolean(q.answer?.trim());
+        card.innerHTML = `
+          <p class="buzon-name">${esc(q.name || 'Anónimo')}</p>
+          <p class="buzon-date">${date}</p>
+          <p class="buzon-question">${esc(q.question)}</p>
+          ${answered
+            ? `<div class="buzon-answer-box"><strong>Respuesta</strong>${esc(q.answer)}</div>`
+            : `<p class="buzon-waiting">⏳ Esperando respuesta...</p>`}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function esc(v) {
+      return String(v)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+  </script>
+</body>
+</html>

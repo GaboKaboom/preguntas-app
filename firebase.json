@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "server.js",
+      "start-server.bat",
+      "compartir.bat"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/remixed-0d6392aa.html"
+      }
+    ]
+  }
+}
