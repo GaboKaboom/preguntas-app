@@ -386,6 +386,224 @@
       .primary-btn{width:100%;}
       .welcome-cards{grid-template-columns:1fr;}
     }
+
+    /* FAB Right Corner */
+    .fab-right {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(39,50,112,.35);
+      transition: .2s ease;
+    }
+    .fab-right:hover { background: var(--accent-hover); }
+    
+    .fab-mailbox.delete-mode {
+      background: #ef4444;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+    }
+    .fab-mailbox.delete-mode:hover {
+      background: #dc2626;
+    }
+
+    /* Calendar Grid */
+    .calendar-wrapper {
+      margin-top: 1rem;
+    }
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .calendar-header h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+    .calendar-nav-btn {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .calendar-nav-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .calendar-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .calendar-cell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      position: relative;
+      transition: .2s ease;
+      color: var(--text);
+    }
+    .calendar-cell:hover {
+      border-color: var(--accent);
+      background: var(--surface-2);
+    }
+    .calendar-cell.empty {
+      background: transparent;
+      border-color: transparent;
+      cursor: default;
+    }
+    .calendar-cell.today {
+      border-color: var(--gold);
+      background: rgba(255, 212, 6, 0.05);
+      color: #b45309;
+    }
+    .calendar-cell.selected {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .calendar-cell.has-events::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .calendar-cell.selected.has-events::after {
+      background: #fff;
+    }
+
+    /* Selected day events list */
+    .day-events-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .event-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+      transition: .2s ease;
+    }
+    .event-card:hover {
+      border-color: var(--accent);
+    }
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.75rem;
+    }
+    .event-tag {
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+    }
+    .event-tag.prueba { background: rgba(228, 67, 21, 0.1); color: var(--red); border: 1px solid rgba(228, 67, 21, 0.2); }
+    .event-tag.trabajo { background: rgba(39, 50, 112, 0.1); color: var(--accent); border: 1px solid rgba(39, 50, 112, 0.2); }
+    .event-tag.simulacro { background: rgba(217, 119, 6, 0.1); color: #d97706; border: 1px solid rgba(217, 119, 6, 0.2); }
+    .event-tag.reunion { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+    .event-tag.actividad { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.2); }
+    .event-tag.otro { background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+
+    .event-course {
+      background: var(--surface-2);
+      color: var(--text-2);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .event-time {
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .event-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+    .event-description {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+    .event-author {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+    
+    /* Delete button on events (moderator mode) */
+    .event-delete-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: .2s ease;
+    }
+    .event-delete-btn:hover {
+      background: #ef4444;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -397,6 +615,10 @@
   <button class="fab-mailbox" id="fabBtn" title="Ver buzón" style="position:fixed;bottom:1.5rem;left:1.5rem;">
     📬
     <span class="fab-badge hidden" id="fabBadge">0</span>
+  </button>
+
+  <button class="fab-right" id="fabRightBtn" title="Ver calendario">
+    📅
   </button>
 
   <!-- BIENVENIDA -->
@@ -505,6 +727,120 @@
     </div>
   </div>
 
+  <!-- CALENDARIO -->
+  <div id="screen-calendar" class="screen">
+    <div class="app-shell">
+      <button class="back-btn" id="calendarBackBtn">← Volver</button>
+      <p class="page-eyebrow">Agenda Escolar</p>
+      <h1 class="page-title">Calendario de Eventos</h1>
+      <p class="page-subtitle">Visualiza y coordina eventos importantes de la comunidad.</p>
+      
+      <div class="panel">
+        <div class="calendar-wrapper">
+          <div class="calendar-header">
+            <button class="calendar-nav-btn" id="prevMonthBtn">←</button>
+            <h2 id="currentMonthYear">Junio 2026</h2>
+            <button class="calendar-nav-btn" id="nextMonthBtn">→</button>
+          </div>
+          <div class="calendar-days-grid">
+            <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+      </div>
+
+      <!-- Detalle del día seleccionado -->
+      <div class="panel">
+        <div class="day-events-header">
+          <h3 id="selectedDateTitle">Eventos para el día</h3>
+          <button class="primary-btn" id="goToAddEventBtn">Agregar evento +</button>
+        </div>
+        <div id="dayEventsContainer" class="questions-container">
+          <p class="muted-text">Selecciona un día en el calendario para ver sus eventos.</p>
+        </div>
+      </div>
+      
+      <div id="calendarMessage" class="message-box hidden" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- AGREGAR EVENTO -->
+  <div id="screen-add-event" class="screen">
+    <div class="app-shell">
+      <button class="back-btn" id="backToCalendarBtn">← Volver al Calendario</button>
+      <p class="page-eyebrow">Nuevo Evento</p>
+      <h1 class="page-title">Agregar Evento</h1>
+      <p class="page-subtitle">Registra una nueva fecha en el calendario escolar.</p>
+      
+      <div class="panel">
+        <form id="eventForm" class="stacked-form">
+          <label>Título del Evento
+            <input type="text" id="eventTitle" placeholder="Ej: Control de Matemáticas" required />
+          </label>
+          <label>Descripción / Detalles
+            <textarea id="eventDescription" rows="3" placeholder="Detalles de la actividad, sala, temarios, etc." required></textarea>
+          </label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <label>Fecha
+              <input type="date" id="eventDate" min="2026-07-01" max="2026-12-31" required />
+            </label>
+            <label>Horario
+              <input type="text" id="eventTime" placeholder="Ej: 10:30 - 12:00" required />
+            </label>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <label>Curso Dirigido
+              <select id="eventCourse" required style="width:100%; padding:.85rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface-2); font:inherit;">
+                <option value="" disabled selected>Selecciona curso</option>
+                <option value="General">General</option>
+                <option value="Segundo ciclo">Segundo ciclo</option>
+                <option value="Tercer ciclo">Tercer ciclo</option>
+                <option value="4° básico A">4° básico A</option>
+                <option value="4° básico B">4° básico B</option>
+                <option value="5° básico A">5° básico A</option>
+                <option value="5° básico B">5° básico B</option>
+                <option value="6° básico A">6° básico A</option>
+                <option value="6° básico B">6° básico B</option>
+                <option value="7° básico A">7° básico A</option>
+                <option value="7° básico B">7° básico B</option>
+                <option value="8° básico A">8° básico A</option>
+                <option value="8° básico B">8° básico B</option>
+                <option value="I° medio A">I° medio A</option>
+                <option value="I° medio B">I° medio B</option>
+                <option value="II° medio A">II° medio A</option>
+                <option value="II° medio B">II° medio B</option>
+                <option value="III° medio A">III° medio A</option>
+                <option value="III° medio B">III° medio B</option>
+                <option value="IV° medio A">IV° medio A</option>
+                <option value="IV° medio B">IV° medio B</option>
+              </select>
+            </label>
+            <label>Categoría / Tema
+              <select id="eventCategory" required style="width:100%; padding:.85rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface-2); font:inherit;">
+                <option value="" disabled selected>Selecciona tema</option>
+                <option value="Prueba">Prueba</option>
+                <option value="Trabajo">Trabajo</option>
+                <option value="Simulacro">Simulacro</option>
+                <option value="Reunión">Reunión</option>
+                <option value="Actividad">Actividad</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </label>
+          </div>
+          <label>Nombre / Alias del Autor
+            <input type="text" id="eventAuthor" placeholder="Ej: Prof. Gabriel o Anónimo" />
+          </label>
+          
+          <div class="form-actions">
+            <button type="submit" class="primary-btn">Publicar Evento →</button>
+            <p class="helper-text">Será visible para toda la comunidad.</p>
+          </div>
+        </form>
+      </div>
+      <div id="eventMessage" class="message-box hidden" aria-live="polite"></div>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, serverTimestamp }
@@ -526,6 +862,8 @@
     const adminCode    = 'RED_NSDC';
     let previousScreen = 'screen-welcome';
     let allQuestions   = [];
+    let isDeleteMode   = false;
+    let isModerator    = false;
 
     /* ── Navegación ── */
     function goTo(screenId) {
@@ -539,8 +877,29 @@
       next.classList.add('active');
       next.style.display = screenId === 'screen-welcome' ? 'flex' : 'block';
       window.scrollTo(0, 0);
+      
+      isDeleteMode = false;
+      const fabBtn = document.getElementById('fabBtn');
+      const fabRightBtn = document.getElementById('fabRightBtn');
+
+      if (screenId === 'screen-calendar' || screenId === 'screen-add-event') {
+        fabBtn.innerHTML = '🚫';
+        fabBtn.title = 'Eliminar eventos desubicados';
+        fabBtn.classList.add('delete-mode');
+        fabRightBtn.innerHTML = '💬';
+        fabRightBtn.title = 'Volver a preguntas';
+      } else {
+        const unseen = Math.max(0, allQuestions.length - parseInt(localStorage.getItem(SEEN_KEY) || '0', 10));
+        fabBtn.innerHTML = `📬 <span class="fab-badge ${unseen > 0 ? '' : 'hidden'}" id="fabBadge">${unseen > 99 ? '99+' : unseen}</span>`;
+        fabBtn.title = 'Ver buzón';
+        fabBtn.classList.remove('delete-mode');
+        fabRightBtn.innerHTML = '📅';
+        fabRightBtn.title = 'Ver calendario';
+      }
+
       if (screenId === 'screen-buzon') { renderBuzon(); markAllSeen(); }
       if (screenId === 'screen-admin') renderAdmin();
+      if (screenId === 'screen-calendar') renderCalendar();
     }
 
     // Init: asegurar que solo welcome sea visible
@@ -548,7 +907,24 @@
     const welcome = document.getElementById('screen-welcome');
     welcome.style.display = 'flex';
 
-    document.getElementById('fabBtn').addEventListener('click', () => goTo('screen-buzon'));
+    document.getElementById('fabBtn').addEventListener('click', () => {
+      const activeScreen = document.querySelector('.screen.active')?.id;
+      if (activeScreen === 'screen-calendar' || activeScreen === 'screen-add-event') {
+        toggleDeleteMode();
+      } else {
+        goTo('screen-buzon');
+      }
+    });
+
+    document.getElementById('fabRightBtn').addEventListener('click', () => {
+      const activeScreen = document.querySelector('.screen.active')?.id;
+      if (activeScreen === 'screen-calendar' || activeScreen === 'screen-add-event') {
+        goTo('screen-welcome');
+      } else {
+        goTo('screen-calendar');
+      }
+    });
+
     document.getElementById('btnPublic').addEventListener('click', () => goTo('screen-public'));
     document.getElementById('btnAdmin').addEventListener('click', () => goTo('screen-login'));
     document.getElementById('backFromPublic').addEventListener('click', () => goTo('screen-welcome'));
@@ -612,6 +988,7 @@
       const entered = document.getElementById('adminCodeInput').value.trim();
       if (!entered) { showMsg('loginMessage', 'Ingresa un código para continuar.', 'error'); return; }
       if (entered === adminCode) {
+        isModerator = true;
         document.getElementById('adminCodeInput').value = '';
         hideMsg('loginMessage');
         goTo('screen-admin');
@@ -711,6 +1088,234 @@
         .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
         .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
     }
+
+    /* ── Calendario Lógica y Renderizado ── */
+    let currentMonth = Math.min(11, Math.max(6, new Date().getMonth()));
+    let currentYear = 2026;
+    let todayObj = new Date();
+    let selectedDateStr = (todayObj.getFullYear() === 2026 && todayObj.getMonth() >= 6 && todayObj.getMonth() <= 11)
+      ? todayObj.toISOString().split('T')[0]
+      : '2026-07-01';
+    let allEvents = [];
+
+    const monthNames = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
+    onSnapshot(collection(db, 'events'), (snapshot) => {
+      let rawEvents = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      
+      // Auto-delete events whose month has passed
+      const hoy = new Date();
+      const currYear = hoy.getFullYear();
+      const currMonth = hoy.getMonth() + 1; // 1-12
+      
+      rawEvents.forEach(e => {
+        if (e.date) {
+          const [evYear, evMonth] = e.date.split('-').map(Number);
+          if (evYear < currYear || (evYear === currYear && evMonth < currMonth)) {
+            deleteDoc(doc(db, 'events', e.id));
+          }
+        }
+      });
+
+      // Filter locally to avoid rendering events that are being deleted
+      allEvents = rawEvents.filter(e => {
+        if (!e.date) return false;
+        const [evYear, evMonth] = e.date.split('-').map(Number);
+        return !(evYear < currYear || (evYear === currYear && evMonth < currMonth));
+      });
+
+      allEvents.sort((a, b) => {
+        if (a.date !== b.date) return a.date.localeCompare(b.date);
+        return (a.time || '').localeCompare(b.time || '');
+      });
+      const active = document.querySelector('.screen.active')?.id;
+      if (active === 'screen-calendar') {
+        renderCalendar();
+        renderSelectedDayEvents();
+      }
+    }, function(error) {
+      console.error('Firestore events error:', error);
+    });
+
+    function renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      const headerTitle = document.getElementById('currentMonthYear');
+      grid.innerHTML = '';
+      headerTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+      
+      const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+      const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
+      
+      for (let i = 0; i < firstDayIndex; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell empty';
+        grid.appendChild(cell);
+      }
+      
+      const today = new Date();
+      const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      
+      for (let day = 1; day <= lastDay; day++) {
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        cell.textContent = day;
+        
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        
+        if (dateStr === todayStr) cell.classList.add('today');
+        if (dateStr === selectedDateStr) cell.classList.add('selected');
+        
+        const dayHasEvents = allEvents.some(e => e.date === dateStr);
+        if (dayHasEvents) cell.classList.add('has-events');
+        
+        cell.addEventListener('click', () => {
+          selectedDateStr = dateStr;
+          document.querySelectorAll('.calendar-cell').forEach(c => c.classList.remove('selected'));
+          cell.classList.add('selected');
+          renderSelectedDayEvents();
+        });
+        grid.appendChild(cell);
+      }
+    }
+
+    function renderSelectedDayEvents() {
+      const container = document.getElementById('dayEventsContainer');
+      const title = document.getElementById('selectedDateTitle');
+      container.innerHTML = '';
+      
+      const [y, m, d] = selectedDateStr.split('-');
+      const formattedDate = `${d}/${m}/${y}`;
+      title.textContent = `Eventos para el ${formattedDate}`;
+      
+      const filtered = allEvents.filter(e => e.date === selectedDateStr);
+      if (!filtered.length) {
+        container.innerHTML = '<p class="muted-text">No hay eventos programados para este día.</p>';
+        return;
+      }
+      
+      const hoy = new Date();
+      const todayStr = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${String(hoy.getDate()).padStart(2, '0')}`;
+
+      filtered.forEach(e => {
+        const card = document.createElement('article');
+        card.className = 'event-card';
+        const catClass = (e.category || 'otro').toLowerCase();
+        const isCompleted = e.date < todayStr;
+        
+        card.innerHTML = `
+          <div class="event-meta">
+            <span class="event-tag ${catClass}">${esc(e.category || 'Otro')}</span>
+            <span class="event-course">${esc(e.course || 'Todo público')}</span>
+            <span class="event-time">⏰ ${esc(e.time || 'Todo el día')}</span>
+            ${isCompleted ? `<span class="status-pill answered" style="margin-left:auto; font-weight:700;">✓ Completado</span>` : `<span class="status-pill pending" style="margin-left:auto; font-weight:700;">· Activo</span>`}
+          </div>
+          <h4 class="event-title">${esc(e.title)}</h4>
+          <p class="event-description">${esc(e.description)}</p>
+          <div class="event-author">Publicado por: ${esc(e.author || 'Anónimo')}</div>
+          ${isDeleteMode ? `<button class="event-delete-btn" title="Eliminar evento">🗑️</button>` : ''}
+        `;
+        
+        if (isDeleteMode) {
+          card.querySelector('.event-delete-btn').addEventListener('click', async () => {
+            if (confirm(`¿Estás seguro de que quieres eliminar el evento "${e.title}"?`)) {
+              try {
+                await deleteDoc(doc(db, 'events', e.id));
+                showCalendarMsg('✓ Evento eliminado correctamente.', 'success');
+              } catch (err) {
+                console.error(err);
+                showCalendarMsg('Error al eliminar el evento.', 'error');
+              }
+            }
+          });
+        }
+        container.appendChild(card);
+      });
+    }
+
+    async function toggleDeleteMode() {
+      if (isDeleteMode) {
+        isDeleteMode = false;
+        showCalendarMsg('Modo eliminación desactivado.', 'success');
+        renderSelectedDayEvents();
+        return;
+      }
+      if (!isModerator) {
+        const code = prompt('Ingresa el código de acceso para eliminar eventos:');
+        if (code === adminCode) {
+          isModerator = true;
+          isDeleteMode = true;
+          showCalendarMsg('Modo de eliminación activado. Haz clic en el botón de borrar (🗑️) del evento.', 'success');
+          renderSelectedDayEvents();
+        } else if (code !== null) {
+          alert('Código incorrecto.');
+        }
+      } else {
+        isDeleteMode = true;
+        showCalendarMsg('Modo de eliminación activado. Haz clic en el botón de borrar (🗑️) del evento.', 'success');
+        renderSelectedDayEvents();
+      }
+    }
+
+    function showCalendarMsg(text, type = 'success') {
+      showMsg('calendarMessage', text, type);
+      setTimeout(() => hideMsg('calendarMessage'), 4000);
+    }
+
+    document.getElementById('prevMonthBtn').addEventListener('click', () => {
+      if (currentMonth > 6) {
+        currentMonth--;
+        renderCalendar();
+      }
+    });
+
+    document.getElementById('nextMonthBtn').addEventListener('click', () => {
+      if (currentMonth < 11) {
+        currentMonth++;
+        renderCalendar();
+      }
+    });
+
+    document.getElementById('calendarBackBtn').addEventListener('click', () => goTo('screen-welcome'));
+    document.getElementById('goToAddEventBtn').addEventListener('click', () => {
+      document.getElementById('eventDate').value = selectedDateStr;
+      goTo('screen-add-event');
+    });
+    document.getElementById('backToCalendarBtn').addEventListener('click', () => goTo('screen-calendar'));
+
+    document.getElementById('eventForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideMsg('eventMessage');
+      
+      const title = document.getElementById('eventTitle').value.trim();
+      const description = document.getElementById('eventDescription').value.trim();
+      const date = document.getElementById('eventDate').value;
+      const time = document.getElementById('eventTime').value.trim();
+      const course = document.getElementById('eventCourse').value;
+      const category = document.getElementById('eventCategory').value;
+      const author = document.getElementById('eventAuthor').value.trim() || 'Anónimo';
+      
+      try {
+        await addDoc(collection(db, 'events'), {
+          title, description, date, time, course, category, author, createdAt: serverTimestamp()
+        });
+        document.getElementById('eventForm').reset();
+        selectedDateStr = date;
+        const [selYear, selMonth] = date.split('-');
+        currentYear = parseInt(selYear);
+        currentMonth = parseInt(selMonth) - 1;
+        showMsg('eventMessage', '✓ Evento creado con éxito.');
+        setTimeout(() => {
+          hideMsg('eventMessage');
+          goTo('screen-calendar');
+        }, 1500);
+      } catch (err) {
+        console.error(err);
+        showMsg('eventMessage', 'Error al crear el evento. Inténtalo de nuevo.', 'error');
+      }
+    });
   </script>
 </body>
 </html>
