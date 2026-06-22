@@ -621,9 +621,8 @@
     </a>
   </div>
 
-  <button class="fab-mailbox" id="fabBtn" title="Ver buzón" style="position:fixed;bottom:1.5rem;left:1.5rem;">
-    📬
-    <span class="fab-badge hidden" id="fabBadge">0</span>
+  <button class="fab-mailbox" id="fabBtn" title="Responder preguntas" style="position:fixed;bottom:1.5rem;left:1.5rem;">
+    🔑
   </button>
 
   <button class="fab-right" id="fabRightBtn" title="Ver calendario">
@@ -638,11 +637,11 @@
       <p>Elige cómo quieres participar hoy.</p>
     </div>
     <div class="welcome-cards">
-      <div class="welcome-card" id="btnAdmin">
-        <span class="card-icon">🔑</span>
-        <h2>Responder preguntas</h2>
-        <p>Accede con tu código para responder las dudas del grupo.</p>
-        <button class="card-btn card-btn-admin">Ingresar con código →</button>
+      <div class="welcome-card" id="btnBuzon">
+        <span class="card-icon">📬</span>
+        <h2>Buzón de preguntas</h2>
+        <p>Revisa todas las preguntas y respuestas del grupo.</p>
+        <button class="card-btn">Ir al buzón →</button>
       </div>
       <div class="welcome-card" id="btnPublic">
         <span class="card-icon">✉️</span>
@@ -898,9 +897,8 @@
         fabRightBtn.innerHTML = '💬';
         fabRightBtn.title = 'Volver a preguntas';
       } else {
-        const unseen = Math.max(0, allQuestions.length - parseInt(localStorage.getItem(SEEN_KEY) || '0', 10));
-        fabBtn.innerHTML = `📬 <span class="fab-badge ${unseen > 0 ? '' : 'hidden'}" id="fabBadge">${unseen > 99 ? '99+' : unseen}</span>`;
-        fabBtn.title = 'Ver buzón';
+        fabBtn.innerHTML = '🔑';
+        fabBtn.title = 'Responder preguntas';
         fabBtn.classList.remove('delete-mode');
         fabRightBtn.innerHTML = '📅';
         fabRightBtn.title = 'Ver calendario';
@@ -921,7 +919,7 @@
       if (activeScreen === 'screen-calendar' || activeScreen === 'screen-add-event') {
         toggleDeleteMode();
       } else {
-        goTo('screen-buzon');
+        goTo('screen-login');
       }
     });
 
@@ -934,8 +932,8 @@
       }
     });
 
+    document.getElementById('btnBuzon').addEventListener('click', () => goTo('screen-buzon'));
     document.getElementById('btnPublic').addEventListener('click', () => goTo('screen-public'));
-    document.getElementById('btnAdmin').addEventListener('click', () => goTo('screen-login'));
     document.getElementById('backFromPublic').addEventListener('click', () => goTo('screen-welcome'));
     document.getElementById('backFromLogin').addEventListener('click', () => goTo('screen-welcome'));
     document.getElementById('logoutBtn').addEventListener('click', () => goTo('screen-welcome'));
