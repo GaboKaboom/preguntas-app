@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#273270" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="images/logochico.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="images/logochico.svg" />
   <title>Preguntas y respuestas</title>
   <style>
     :root{
@@ -76,6 +82,7 @@
       box-shadow:0 2px 8px rgba(0,0,0,.12);
       border:1px solid var(--border);
     }
+    .logo-corner a{display:block;width:100%;height:100%;}
     .logo-corner img{width:100%;height:100%;object-fit:contain;background:#FFD406;}
 
     /* FAB */
@@ -609,7 +616,9 @@
 <body>
 
   <div class="logo-corner">
-    <img src="images/logochico.svg" alt="Logo NSDC" />
+    <a href="https://www.nsdc.cl" target="_blank" rel="noopener noreferrer" title="Ir al sitio web de NSDC">
+      <img src="images/logochico.svg" alt="Logo NSDC" />
+    </a>
   </div>
 
   <button class="fab-mailbox" id="fabBtn" title="Ver buzón" style="position:fixed;bottom:1.5rem;left:1.5rem;">
@@ -1316,6 +1325,14 @@
         showMsg('eventMessage', 'Error al crear el evento. Inténtalo de nuevo.', 'error');
       }
     });
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
   </script>
 </body>
 </html>
