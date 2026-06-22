@@ -3,7 +3,7 @@ const ASSETS = [
   '/',
   '/remixed-0d6392aa.html',
   '/manifest.json',
-  '/images/logochico.svg'
+  '/images/icono-app.png'
 ];
 
 self.addEventListener('install', (e) => {
