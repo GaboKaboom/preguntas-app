@@ -398,7 +398,7 @@
     .fab-right {
       position: fixed;
       bottom: 1.5rem;
-      left: 1.5rem;
+      right: 1.5rem;
       z-index: 100;
       width: 52px;
       height: 52px;
@@ -621,7 +621,7 @@
     </a>
   </div>
 
-  <button class="fab-mailbox" id="fabBtn" title="Ver buzón" style="position:fixed;bottom:1.5rem;right:1.5rem;">
+  <button class="fab-mailbox" id="fabBtn" title="Ver buzón" style="position:fixed;bottom:1.5rem;left:1.5rem;">
     📬
     <span class="fab-badge hidden" id="fabBadge">0</span>
   </button>
@@ -638,17 +638,17 @@
       <p>Elige cómo quieres participar hoy.</p>
     </div>
     <div class="welcome-cards">
-      <div class="welcome-card" id="btnPublic">
-        <span class="card-icon">✉️</span>
-        <h2>Hacer una pregunta</h2>
-        <p>Envía tu duda al grupo. No necesitas código.</p>
-        <button class="card-btn">Ir a preguntar →</button>
-      </div>
       <div class="welcome-card" id="btnAdmin">
         <span class="card-icon">🔑</span>
         <h2>Responder preguntas</h2>
         <p>Accede con tu código para responder las dudas del grupo.</p>
         <button class="card-btn card-btn-admin">Ingresar con código →</button>
+      </div>
+      <div class="welcome-card" id="btnPublic">
+        <span class="card-icon">✉️</span>
+        <h2>Hacer una pregunta</h2>
+        <p>Envía tu duda al grupo. No necesitas código.</p>
+        <button class="card-btn">Ir a preguntar →</button>
       </div>
     </div>
   </div>
