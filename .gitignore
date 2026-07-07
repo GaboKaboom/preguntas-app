@@ -2,5 +2,4 @@ node_modules/
 ngrok_log.txt
 *.log
 
-# Local Netlify folder
-.netlify
+
