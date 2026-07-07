@@ -386,6 +386,10 @@
 
     .hidden{display:none !important;}
 
+    /* Gate screen */
+    #screen-gate.active{display:flex !important;}
+    #gateForm input:focus{border-color:var(--gold) !important;box-shadow:0 0 0 3px rgba(255,212,6,.2) !important;background:rgba(255,255,255,.15) !important;}
+
     @media (max-width:640px){
       .app-shell{width:calc(100% - 1rem);padding:1rem 0 2rem;}
       .panel,.welcome-card{padding:1.1rem;}
@@ -621,8 +625,23 @@
     </a>
   </div>
 
+  <!-- GATE: Pantalla de bienvenida con correo institucional -->
+  <div id="screen-gate" class="screen" style="position:fixed;inset:0;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#273270,#1a1f4a);padding:2rem;text-align:center;">
+    <div style="max-width:480px;width:100%;">
+      <img src="images/logochico.svg" alt="Logo NSDC" style="width:80px;height:80px;object-fit:contain;background:#FFD406;border-radius:12px;padding:8px;margin-bottom:1.5rem;" />
+      <h1 style="font-size:clamp(1.8rem,5vw,2.5rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:1rem;">BIENVENIDOS A MI PÁGINA,<br/>HECHO POR UNO DE USTEDES</h1>
+      <p style="color:rgba(255,255,255,.75);font-size:1rem;line-height:1.6;margin-bottom:2rem;">Para evitar invitados no deseados te pido que pongas tu correo institucional</p>
+      <form id="gateForm" style="display:flex;flex-direction:column;gap:1rem;">
+        <input type="email" id="gateEmail" placeholder="ejemplo@colegio.cl" required style="width:100%;padding:1rem 1.2rem;border-radius:12px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:#fff;font:inherit;font-size:1rem;outline:none;transition:.2s ease;" />
+        <button type="submit" style="width:100%;padding:1rem;border-radius:12px;border:none;background:var(--gold);color:#273270;font:inherit;font-size:1rem;font-weight:800;cursor:pointer;transition:.2s ease;">Ingresar →</button>
+      </form>
+      <p id="gateError" style="color:#f87171;font-size:.9rem;margin-top:1rem;display:none;"></p>
+    </div>
+  </div>
+
   <button class="fab-mailbox" id="fabBtn" title="Responder preguntas" style="position:fixed;bottom:1.5rem;left:1.5rem;">
     🔑
+    <span class="fab-badge" id="fabBadge">0</span>
   </button>
 
   <button class="fab-right" id="fabRightBtn" title="Ver calendario">
@@ -630,7 +649,7 @@
   </button>
 
   <!-- BIENVENIDA -->
-  <div id="screen-welcome" class="screen active" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;gap:2rem;">
+  <div id="screen-welcome" class="screen" style="min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;gap:2rem;">
     <div class="welcome-header">
       <p class="page-eyebrow">Sistema de preguntas</p>
       <h1>Preguntas y respuestas del grupo</h1>
@@ -714,6 +733,14 @@
           <span id="questionsCount" class="muted-text">0</span>
         </div>
         <div id="questionsContainer" class="questions-container"><p class="loading-text">Cargando...</p></div>
+      </div>
+      <div class="panel">
+        <div class="questions-head">
+          <h3>Usuarios registrados</h3>
+          <span id="accessCount" class="muted-text">0</span>
+        </div>
+        <p class="helper-text" style="margin-bottom:.75rem;">Estos correos han ingresado a la app. Puedes eliminar invitados externos.</p>
+        <div id="accessContainer" class="questions-container"><p class="muted-text">Cargando...</p></div>
       </div>
     </div>
   </div>
@@ -872,6 +899,7 @@
     let allQuestions   = [];
     let isDeleteMode   = false;
     let isModerator    = false;
+    let allAccessUsers = [];
 
     /* ── Navegación ── */
     function goTo(screenId) {
@@ -905,14 +933,20 @@
       }
 
       if (screenId === 'screen-buzon') { renderBuzon(); markAllSeen(); }
-      if (screenId === 'screen-admin') renderAdmin();
+      if (screenId === 'screen-admin') { renderAdmin(); renderAdminUsers(); }
       if (screenId === 'screen-calendar') renderCalendar();
     }
 
-    // Init: asegurar que solo welcome sea visible
-    document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-    const welcome = document.getElementById('screen-welcome');
-    welcome.style.display = 'flex';
+    // Init: si ya ingresó email va al welcome, si no al gate
+    const savedEmail = localStorage.getItem('user-email');
+    if (savedEmail) {
+      goTo('screen-welcome');
+    } else {
+      document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+      const gate = document.getElementById('screen-gate');
+      gate.classList.add('active');
+      gate.style.display = 'flex';
+    }
 
     document.getElementById('fabBtn').addEventListener('click', () => {
       const activeScreen = document.querySelector('.screen.active')?.id;
@@ -979,7 +1013,7 @@
         }
       });
       const active = document.querySelector('.screen.active')?.id;
-      if (active === 'screen-admin') renderAdmin();
+      if (active === 'screen-admin') { renderAdmin(); renderAdminUsers(); }
       if (active === 'screen-buzon') renderBuzon();
     }, function(error) {
       console.error('Firestore error:', error);
@@ -1002,6 +1036,41 @@
       } else {
         showMsg('loginMessage', 'Código incorrecto. Inténtalo de nuevo.', 'error');
       }
+    });
+
+    /* ── Gate: correo institucional ── */
+    document.getElementById('gateForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('gateEmail').value.trim();
+      const errEl = document.getElementById('gateError');
+      if (!email || !email.includes('@')) {
+        errEl.textContent = 'Ingresa un correo válido.';
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+      try {
+        await addDoc(collection(db, 'access'), { email, createdAt: serverTimestamp() });
+        localStorage.setItem('user-email', email);
+        goTo('screen-welcome');
+      } catch {
+        errEl.textContent = 'Error al guardar. Intenta de nuevo.';
+        errEl.style.display = 'block';
+      }
+    });
+
+    /* ── Firestore acceso usuarios ── */
+    onSnapshot(collection(db, 'access'), (snapshot) => {
+      allAccessUsers = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      allAccessUsers.sort((a, b) => {
+        const tA = a.createdAt ? a.createdAt.seconds : 0;
+        const tB = b.createdAt ? b.createdAt.seconds : 0;
+        return tB - tA;
+      });
+      const active = document.querySelector('.screen.active')?.id;
+      if (active === 'screen-admin') renderAdminUsers();
+    }, function(error) {
+      console.error('Firestore access error:', error);
     });
 
     /* ── Formulario público ── */
@@ -1062,6 +1131,42 @@
         } catch { showMsg('adminMessage', 'Error al guardar. Intenta de nuevo.', 'error'); }
       });
       return card;
+    }
+
+    /* ── Render usuarios registrados ── */
+    function renderAdminUsers() {
+      const container = document.getElementById('accessContainer');
+      const count     = document.getElementById('accessCount');
+      container.innerHTML = '';
+      count.textContent = allAccessUsers.length;
+      if (!allAccessUsers.length) { container.innerHTML = '<p class="muted-text">Aún no hay usuarios registrados.</p>'; return; }
+      const seen = {};
+      allAccessUsers.forEach(u => {
+        if (seen[u.email]) return;
+        seen[u.email] = true;
+        const card = document.createElement('article');
+        card.className = 'buzon-card';
+        const date = u.createdAt?.toDate
+          ? u.createdAt.toDate().toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' })
+          : '—';
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;">
+            <div>
+              <p style="font-weight:600;font-size:.92rem;">${esc(u.email)}</p>
+              <p class="muted-text" style="font-size:.8rem;">${date}</p>
+            </div>
+            <button class="event-delete-btn" title="Eliminar este usuario" style="position:static;flex-shrink:0;">🗑️</button>
+          </div>
+        `;
+        card.querySelector('.event-delete-btn').addEventListener('click', async () => {
+          if (confirm(`¿Eliminar el acceso de ${u.email}?`)) {
+            try {
+              await deleteDoc(doc(db, 'access', u.id));
+            } catch (err) { console.error(err); }
+          }
+        });
+        container.appendChild(card);
+      });
     }
 
     /* ── Render buzón ── */
